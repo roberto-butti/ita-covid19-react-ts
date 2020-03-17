@@ -29,6 +29,15 @@ class Dashboard extends Component<IProps, IState> {
     };
   }
 
+  manageData(response: any){
+    console.log(response);
+    response = response.filter( (d: any) => d.denominazione_regione === this.state.region)
+    this.setState({
+          data: response,
+          loading: false
+        })
+  }
+
   componentDidMount() {
     this.setState({
       loading: true,
@@ -39,10 +48,7 @@ class Dashboard extends Component<IProps, IState> {
     )
       .then(response => response.json())
       .then(response =>
-        this.setState({
-          data: response.results,
-          loading: false
-        })
+        this.manageData(response)
       )
       .catch(error =>
         this.setState({
@@ -52,10 +58,26 @@ class Dashboard extends Component<IProps, IState> {
       );
   }
   render() {
+    const { data, loading, error } = this.state;
+
     return (
+      <>
+      {loading && <div>Loading...</div>}
+      
+      {!loading && !error && 
+          data.map((datas: any) => (
+            <div key={datas.data + "-"+datas.denominazione_regione}>
+              {datas.data} - {datas.denominazione_regione}
+              - {datas.dimessi_guariti}
+              - {datas.deceduti}
+
+            </div>
+          ))
+        }
       <div className="Dashboard">
         <div className="dashboard" id="dashboard"></div>
       </div>
+      </>
     );
   }
 }
