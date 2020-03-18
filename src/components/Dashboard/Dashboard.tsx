@@ -42,35 +42,35 @@ class Dashboard extends Component<IProps, IState> {
   loadDatasetCharts() {
 
     let dataRegions: any = {};
-    this.regions.map((region, index) => {
-    let dataset: IDataset = this.dataset("dimessi_guariti", region);
-    let datasetTotaleCasi: IDataset = this.dataset("totale_casi", region);
-    let data = {
-      labels: dataset.label,
-      datasets: [
-        {
-          label: 'Dimessi Guariti',
-          backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(255,99,132,1)',
-          borderWidth: 3,
-          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-          hoverBorderColor: 'rgba(255,99,132,1)',
-          data: dataset.data
-        },
-        {
-          label: 'Totale Casi',
-          //backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(132,99,255,1)',
-          borderWidth: 3,
-          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-          hoverBorderColor: 'rgba(255,99,132,1)',
-          data: datasetTotaleCasi.data
-        },
+    this.regions.map((region: string):void => {
+      let dataset: IDataset = this.dataset("dimessi_guariti", region);
+      let datasetTotaleCasi: IDataset = this.dataset("totale_casi", region);
+      let data = {
+        labels: dataset.label,
+        datasets: [
+          {
+            label: 'Dimessi Guariti',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 3,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: dataset.data
+          },
+          {
+            label: 'Totale Casi',
+            //backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(132,99,255,1)',
+            borderWidth: 3,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: datasetTotaleCasi.data
+          },
 
-      ]
-    };
-    dataRegions[region]= data;
-    
+        ]
+      };
+      dataRegions[region]= data;
+      return dataRegions;
     })
     this.setState({ dataChart: dataRegions });
 
@@ -85,7 +85,10 @@ class Dashboard extends Component<IProps, IState> {
     }
     for (let index = 0; index < data.length; index++) {
       let element = data[index];
-      res.label[index] = element.data;
+      let d = new Date(element.data);
+      let options = { weekday: 'short',  month: 'short', day: 'numeric' };
+      res.label[index] = d.toLocaleDateString("it-IT", options);
+  //let d = new Date();
       res.data[index] = element[attributeName];
     }
     return res;
