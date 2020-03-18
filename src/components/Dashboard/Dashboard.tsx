@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import "./Dashboard.css";
 /*
 declare global {
@@ -22,10 +22,12 @@ interface IState {
 
 interface IDataset {
   label: string[];
-  data: string[]|number[];
+  data: string[] | number[];
 }
 
 class Dashboard extends Component<IProps, IState> {
+  regions: string[] = ["Veneto", "Lombardia", "Lazio"];
+
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -37,39 +39,47 @@ class Dashboard extends Component<IProps, IState> {
     };
   }
 
-  displayCharts() {
-    let dataset:IDataset = this.dataset("dimessi_guariti");
-    let datasetTotaleCasi:IDataset = this.dataset("totale_casi");
-    let data = {
-  labels: dataset.label,
-  datasets: [
-    {
-      label: 'Dimessi Guariti',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 3,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: dataset.data
-    },
-    {
-      label: 'Totale Casi',
-      //backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(132,99,255,1)',
-      borderWidth: 3,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: datasetTotaleCasi.data
-    },
+  loadDatasetCharts() {
 
-  ]
-};
-this.setState({dataChart: data});
+    let dataRegions: any = {};
+    this.regions.map((region, index) => {
+    let dataset: IDataset = this.dataset("dimessi_guariti", region);
+    let datasetTotaleCasi: IDataset = this.dataset("totale_casi", region);
+    let data = {
+      labels: dataset.label,
+      datasets: [
+        {
+          label: 'Dimessi Guariti',
+          backgroundColor: 'rgba(255,99,132,0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 3,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: dataset.data
+        },
+        {
+          label: 'Totale Casi',
+          //backgroundColor: 'rgba(255,99,132,0.2)',
+          borderColor: 'rgba(132,99,255,1)',
+          borderWidth: 3,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: datasetTotaleCasi.data
+        },
+
+      ]
+    };
+    dataRegions[region]= data;
+    
+    })
+    this.setState({ dataChart: dataRegions });
+
   }
 
-  dataset(attributeName: string): IDataset {
-    let data = this.state.data;
-    let res: IDataset ={
+  dataset(attributeName: string, region: string): IDataset {
+
+    let data = this.state.data.filter((d: any) => d.denominazione_regione === region)
+    let res: IDataset = {
       label: [],
       data: []
     }
@@ -81,14 +91,14 @@ this.setState({dataChart: data});
     return res;
   }
 
-  manageData(response: any){
+  manageData(response: any) {
     console.log(response);
-    response = response.filter( (d: any) => d.denominazione_regione === this.state.region)
+    //response = response.filter((d: any) => d.denominazione_regione === this.state.region)
     this.setState({
-          data: response,
-          loading: false
-        })
-      this.displayCharts();
+      data: response,
+      loading: false
+    })
+    this.loadDatasetCharts();
   }
 
   componentDidMount() {
@@ -115,11 +125,29 @@ this.setState({dataChart: data});
 
     return (
       <>
-      {loading && <div>Loading...</div>}
-      <Line data={dataChart} />
-      {!loading && !error && 
+        {loading && <div>Loading...</div>}
+        <div className="flex flex-row flex-wrap flex-grow mt-2">
+          {this.regions.map((region, index) => {
+            return <div className="w-full md:w-1/2 p-3">
+              <div className="bg-white border rounded shadow">
+                <div className="border-b p-3">
+                  <h5 className="uppercase text-grey-dark">{region}</h5>
+                </div>
+                <div className="p-5">
+                  <Line data={dataChart[region]} />
+                </div>
+              </div>
+            </div>
+
+          })}
+
+          
+        </div>
+
+
+        {!loading && !error &&
           data.map((datas: any) => (
-            <div key={datas.data + "-"+datas.denominazione_regione}>
+            <div key={datas.data + "-" + datas.denominazione_regione}>
               {datas.data} - {datas.denominazione_regione}
               - {datas.dimessi_guariti}
               - {datas.deceduti}
@@ -127,10 +155,10 @@ this.setState({dataChart: data});
             </div>
           ))
         }
-        
-      <div className="Dashboard">
-        <div className="dashboard" id="dashboard"></div>
-      </div>
+
+        <div className="Dashboard">
+          <div className="dashboard" id="dashboard"></div>
+        </div>
       </>
     );
   }
