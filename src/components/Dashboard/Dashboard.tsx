@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Line} from 'react-chartjs-2';
 import "./Dashboard.css";
 /*
 declare global {
@@ -16,6 +17,12 @@ interface IState {
   region: string;
   loading: boolean;
   error: boolean;
+  dataChart: any;
+}
+
+interface IDataset {
+  label: string[];
+  data: string[]|number[];
 }
 
 class Dashboard extends Component<IProps, IState> {
@@ -25,8 +32,53 @@ class Dashboard extends Component<IProps, IState> {
       data: [],
       region: "Veneto",
       loading: false,
-      error: false
+      error: false,
+      dataChart: {}
     };
+  }
+
+  displayCharts() {
+    let dataset:IDataset = this.dataset("dimessi_guariti");
+    let datasetTotaleCasi:IDataset = this.dataset("totale_casi");
+    let data = {
+  labels: dataset.label,
+  datasets: [
+    {
+      label: 'Dimessi Guariti',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 3,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: dataset.data
+    },
+    {
+      label: 'Totale Casi',
+      //backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(132,99,255,1)',
+      borderWidth: 3,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: datasetTotaleCasi.data
+    },
+
+  ]
+};
+this.setState({dataChart: data});
+  }
+
+  dataset(attributeName: string): IDataset {
+    let data = this.state.data;
+    let res: IDataset ={
+      label: [],
+      data: []
+    }
+    for (let index = 0; index < data.length; index++) {
+      let element = data[index];
+      res.label[index] = element.data;
+      res.data[index] = element[attributeName];
+    }
+    return res;
   }
 
   manageData(response: any){
@@ -36,6 +88,7 @@ class Dashboard extends Component<IProps, IState> {
           data: response,
           loading: false
         })
+      this.displayCharts();
   }
 
   componentDidMount() {
@@ -58,12 +111,12 @@ class Dashboard extends Component<IProps, IState> {
       );
   }
   render() {
-    const { data, loading, error } = this.state;
+    const { dataChart, data, loading, error } = this.state;
 
     return (
       <>
       {loading && <div>Loading...</div>}
-      
+      <Line data={dataChart} />
       {!loading && !error && 
           data.map((datas: any) => (
             <div key={datas.data + "-"+datas.denominazione_regione}>
@@ -74,6 +127,7 @@ class Dashboard extends Component<IProps, IState> {
             </div>
           ))
         }
+        
       <div className="Dashboard">
         <div className="dashboard" id="dashboard"></div>
       </div>
