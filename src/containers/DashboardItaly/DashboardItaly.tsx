@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Line } from 'react-chartjs-2';
-import "./Dashboard.css";
-import Loading from "../Loading/Loading";
+import "./DashboardItaly.css";
+import Loading from "../../components/Loading/Loading";
 /*
 declare global {
   interface Window {
@@ -15,7 +15,6 @@ interface IProps {
 }
 interface IState {
   data: any;
-  region: string;
   loading: boolean;
   error: boolean;
   dataChart: any;
@@ -26,14 +25,13 @@ interface IDataset {
   data: string[] | number[];
 }
 
-class Dashboard extends Component<IProps, IState> {
-  regions: string[] = ["Veneto", "Lombardia", "Lazio"];
+class DashboardItaly extends Component<IProps, IState> {
+  
 
   constructor(props: IProps) {
     super(props);
     this.state = {
       data: [],
-      region: "Veneto",
       loading: false,
       error: false,
       dataChart: {}
@@ -42,44 +40,45 @@ class Dashboard extends Component<IProps, IState> {
 
   loadDatasetCharts() {
 
-    let dataRegions: any = {};
-    this.regions.map((region: string):void => {
-      let dataset: IDataset = this.dataset("dimessi_guariti", region);
-      let datasetTotaleCasi: IDataset = this.dataset("totale_casi", region);
-      let data = {
-        labels: dataset.label,
-        datasets: [
-          {
-            label: 'Dimessi Guariti',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            borderWidth: 3,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: dataset.data
-          },
-          {
-            label: 'Totale Casi',
-            //backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(132,99,255,1)',
-            borderWidth: 3,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: datasetTotaleCasi.data
-          },
+    
+    let dataset: IDataset = this.dataset("dimessi_guariti", "");
+    let datasetTotaleCasi: IDataset = this.dataset("totale_casi", "");
+    let data = {
+    labels: dataset.label,
+    datasets: [
+        {
+        label: 'Dimessi Guariti',
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 3,
+        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBorderColor: 'rgba(255,99,132,1)',
+        data: dataset.data
+        },
+        {
+        label: 'Totale Casi',
+        //backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(132,99,255,1)',
+        borderWidth: 3,
+        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBorderColor: 'rgba(255,99,132,1)',
+        data: datasetTotaleCasi.data
+        },
 
-        ]
-      };
-      dataRegions[region]= data;
-      return dataRegions;
-    })
-    this.setState({ dataChart: dataRegions });
+    ]};
+    this.setState({ dataChart: data });
 
   }
 
   dataset(attributeName: string, region: string): IDataset {
 
-    let data = this.state.data.filter((d: any) => d.denominazione_regione === region)
+    let data =[];
+    if (region === "") {
+        data = this.state.data
+    } else {
+        data = this.state.data.filter((d: any) => d.denominazione_regione === region)
+    }
+
     let res: IDataset = {
       label: [],
       data: []
@@ -111,7 +110,7 @@ class Dashboard extends Component<IProps, IState> {
       error: false
     });
     fetch(
-      "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json"
+      "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
     )
       .then(response => response.json())
       .then(response =>
@@ -131,19 +130,16 @@ class Dashboard extends Component<IProps, IState> {
       <>
         {loading && <Loading></Loading>}
         <div className="flex flex-row flex-wrap flex-grow mt-2">
-          {this.regions.map((region, index) => {
-            return <div className="w-full md:w-1/2 p-3">
+            <div className="w-full md:w-1/2 p-3">
               <div className="bg-white border rounded shadow">
                 <div className="border-b p-3">
-                  <h5 className="uppercase text-grey-dark">{region}</h5>
+                  <h5 className="uppercase text-grey-dark">Italia</h5>
                 </div>
                 <div className="p-5">
-                  <Line data={dataChart[region]} />
+                  <Line data={dataChart} />
                 </div>
               </div>
             </div>
-
-          })}
 
           
         </div>
@@ -167,4 +163,4 @@ class Dashboard extends Component<IProps, IState> {
     );
   }
 }
-export default Dashboard;
+export default DashboardItaly;
