@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import DataTable from 'react-data-table-component';
+
+import Table from "../../components/Table/Table";
 
 interface IMainProps {
 }
 
 const Main: React.FunctionComponent<IMainProps> = (props) => {
     const [hasError, setErrors] = useState(false)
-    const [data, setData] = useState([])
+    const [data, setData] = useState<[]>([])
+    const [region, setRegion] = useState("all")
 
-    async function fetchData() {
-        const res = await fetch("https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json");
+    async function fetchData(region: string) {
+        let url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json";
+        if (region !== "all") {
+            url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json";
+        }
+
+        const res = await fetch(url);
         res
             .json()
             .then((res) => {
                 console.log(res)
+                if (region !== "all") {
+                    res = res.filter((d: any) => d.denominazione_regione === region)
+                }
                 let prevRow = {};
                 for (let index = 0; index < res.length; index++) {
                     const element = res[index];
@@ -26,101 +36,25 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
     }
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(region);
+    }, [region]);
+
+    function selectRegion(event: any) {
+        setRegion(event.target.value)
+        //fetchData(region);
+    };
 
 
-    interface IPropsCustomNumber {
-        row: any
-        columnName: string
-
-    }
-    const CustomNumber: React.FunctionComponent<IPropsCustomNumber> = (props: IPropsCustomNumber) => (
-        <div>
-            <div>{props.row[props.columnName]}</div>
-            <div style={{ color: 'grey', overflow: 'hidden', textOverflow: 'ellipses' }}>
-                {props.row[props.columnName] - props.row.prev[props.columnName]}
-            </div>
-            <div style={{ color: 'grey', overflow: 'hidden', textOverflow: 'ellipses' }}>
-                {(100 - ((props.row.prev[props.columnName] / props.row[props.columnName]) * 100)).toFixed(2)}%
-            </div>
-        </div>
-    );
-    const columns = [
-        {
-            name: 'Data',
-            selector: 'data',
-            sortable: true,
-            format: (row: any) => `${(new Date(row.data)).toLocaleDateString('it-IT', { month: 'short', day: 'numeric' })}`,
-        },
-        /*
-        {
-          name: 'Stato',
-          selector: 'stato',
-        },
-        */
-        {
-            name: 'Ricoverati con sintomi',
-            //selector: 'ricoverati_con_sintomi',
-            cell: (row: any) => <CustomNumber row={row} columnName="ricoverati_con_sintomi" />,
-        },
-        {
-            name: 'Terapia Intensiva',
-            //selector: 'terapia_intensiva',
-            cell: (row: any) => <CustomNumber row={row} columnName="terapia_intensiva" />,
-        },
-        {
-            name: 'Tot Ospedalizzati',
-            //selector: 'totale_ospedalizzati',
-            cell: (row: any) => <CustomNumber row={row} columnName="totale_ospedalizzati" />,
-        },
-        {
-            name: 'Isolamento Domiciliare',
-            //selector: 'isolamento_domiciliare',
-            cell: (row: any) => <CustomNumber row={row} columnName="isolamento_domiciliare" />,
-        },
-        {
-            name: 'Totale Attualmente Positivi',
-            //selector: 'totale_attualmente_positivi',
-            cell: (row: any) => <CustomNumber row={row} columnName="totale_attualmente_positivi" />,
-        },
-        {
-            name: 'Nuovi Attualmente Positivi',
-            //selector: 'nuovi_attualmente_positivi',
-            cell: (row: any) => <CustomNumber row={row} columnName="nuovi_attualmente_positivi" />,
-        },
-        {
-            name: 'Dimessi Guariti',
-            //selector: 'dimessi_guariti',
-            cell: (row: any) => <CustomNumber row={row} columnName="dimessi_guariti" />,
-        },
-        {
-            name: 'Deceduti',
-            //selector: 'deceduti',
-            cell: (row: any) => <CustomNumber row={row} columnName="deceduti" />,
-        },
-        {
-            name: 'Totale Casi',
-            //selector: 'totale_casi',
-            cell: (row: any) => <CustomNumber row={row} columnName="totale_casi" />,
-        },
-        {
-            name: 'Tamponi',
-            //selector: 'tamponi',
-            cell: (row: any) => <CustomNumber row={row} columnName="tamponi" />,
-        },
-    ];
     return <>
-        <div>
-            <DataTable
-                title="COVID19 italia"
-                columns={columns}
-                //customStyles={customStyles}
+        <div> Seleziona l'area di interesse:
+            <select value={region} onChange={selectRegion}>
+                <option value="all">Tutta Italia</option>
+                <option value="Lombardia">Lombardia</option>
+                <option value="Veneto">Veneto</option>
+                <option value="Lazio">Lazio</option>
+            </select>
+            <Table
                 data={data}
-                defaultSortField="data"
-                defaultSortAsc={false}
-                fixedHeader
-                fixedHeaderScrollHeight="300px"
             />
             <hr />
             <span>Has error: {JSON.stringify(hasError)}</span>
