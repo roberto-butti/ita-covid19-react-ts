@@ -51,7 +51,11 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
             <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white z-20" id="nav-content">
                 <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
                     <li className="mr-6 my-2 md:my-0">
-                        <Link to="/" className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">Italia</Link>
+                        <Link to="/" className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">Principale</Link>
+                    </li>
+
+                    <li className="mr-6 my-2 md:my-0">
+                        <Link to="/italia" className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">Italia</Link>
                     </li>
 
                     <li className="mr-6 my-2 md:my-0">

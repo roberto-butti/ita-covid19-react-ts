@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard/Dashboard";
+import Main from "./containers/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
 import DashboardItaly from "./containers/DashboardItaly/DashboardItaly";
 import ScrollToTop from "./helpers/ScrollToTop";
@@ -24,8 +25,11 @@ function App() {
               <Route path="/regioni">
                 <Dashboard></Dashboard>
               </Route>
-              <Route path="/">
+              <Route path="/italia">
                 <DashboardItaly></DashboardItaly>
+              </Route>
+              <Route path="/">
+                <Main></Main>
               </Route>
 
             </Switch>
