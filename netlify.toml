@@ -6,3 +6,7 @@
   from = "/italia"
   to = "/index.html"
   status = 200
+[[redirects]]
+  from = "/grafici"
+  to = "/index.html"
+  status = 200

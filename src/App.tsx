@@ -10,6 +10,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Main from "./containers/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
 import DashboardItaly from "./containers/DashboardItaly/DashboardItaly";
+import Charts from "./containers/Charts/Charts";
 import ScrollToTop from "./helpers/ScrollToTop";
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
               </Route>
               <Route path="/italia">
                 <DashboardItaly></DashboardItaly>
+              </Route>
+              <Route path="/grafici">
+                <Charts></Charts>
               </Route>
               <Route path="/">
                 <Main></Main>

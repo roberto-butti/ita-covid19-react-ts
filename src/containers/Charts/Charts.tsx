@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Chart from "../../components/Chart/Chart";
 
-import Table from "../../components/Table/Table";
 import SelectRegions from "../../components/Select/Regions";
 
-interface IMainProps {
+
+export interface IChartsProps {
 }
 
-const Main: React.FunctionComponent<IMainProps> = (props) => {
+export default function Charts (props: IChartsProps) {
     const [hasError, setErrors] = useState(false)
     const [data, setData] = useState<[]>([])
     const [region, setRegion] = useState("all")
@@ -52,9 +53,7 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
 
     return <>
         <SelectRegions region={region} selectRegion={selectRegion}></SelectRegions>
-        <Table
-            data={data}
-        />
+        <Chart data={data} />
         <hr />
         {hasError &&
             <div className="bg-orange-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
@@ -63,6 +62,4 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
             </div>
         }
     </>;
-};
-
-export default Main;
+}
