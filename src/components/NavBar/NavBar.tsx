@@ -63,7 +63,7 @@ export default function NavBar(props: INavBarProps) {
               <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
                 {links.map((el, i) =>
                   <li className="mr-6 my-2 md:my-0">
-                    <Link to={el.url} className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">{el.label}</Link>
+                    <Link onClick={() => setMenuMobileOpen(false)} to={el.url} className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">{el.label}</Link>
                   </li>
                 )}
 
