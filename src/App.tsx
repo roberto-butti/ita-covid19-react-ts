@@ -9,6 +9,7 @@ import {
 import Dashboard from "./components/Dashboard/Dashboard";
 import Main from "./containers/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 import DashboardItaly from "./containers/DashboardItaly/DashboardItaly";
 import Charts from "./containers/Charts/Charts";
 import ScrollToTop from "./helpers/ScrollToTop";
@@ -41,6 +42,7 @@ function App() {
 
           </div>
         </div>
+        <Footer></Footer>
       
     </Router>
   );
