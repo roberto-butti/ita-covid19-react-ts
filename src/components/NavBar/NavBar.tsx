@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Link
 } from "react-router-dom";
@@ -8,6 +8,8 @@ export interface INavBarProps {
 
 
 export default function NavBar(props: INavBarProps) {
+
+  const [menuMobileOpen, setMenuMobileOpen] = useState(false)
 
   interface ILinks {
     url: string
@@ -51,12 +53,23 @@ export default function NavBar(props: INavBarProps) {
 
 
             <div className="block lg:hidden pr-4">
-              <button id="nav-toggle" className="flex items-center px-3 py-2 border rounded text-grey border-grey-dark hover:text-black hover:border-teal appearance-none focus:outline-none">
+              <button onClick={() => setMenuMobileOpen(!menuMobileOpen)} id="nav-toggle" className="flex items-center px-3 py-2 border rounded text-grey border-grey-dark hover:text-black hover:border-teal appearance-none focus:outline-none">
                 <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <title>Menu</title>
                   <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                 </svg>
               </button>
+              {menuMobileOpen &&
+              <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+                {links.map((el, i) =>
+                  <li className="mr-6 my-2 md:my-0">
+                    <Link to={el.url} className="block py-1 md:py-3 pl-1 align-middle text-orange-dark no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">{el.label}</Link>
+                  </li>
+                )}
+
+              </ul>
+              }
+
             </div>
           </div>
 
