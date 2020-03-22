@@ -24,6 +24,7 @@ export default function NavBar(props: INavBarProps) {
       url: "/grafici",
       label: "Grafici"
     },
+    /*
     {
       url: "/regioni",
       label: "Regioni"
@@ -32,6 +33,7 @@ export default function NavBar(props: INavBarProps) {
       url: "/italia",
       label: "Italia"
     },
+    */
 
 
 
