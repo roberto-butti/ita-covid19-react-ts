@@ -7,7 +7,7 @@ export interface INavBarProps {
 }
 declare global {
   interface Window {
-    ga: any;
+    gtag: any;
   }
 }
 
@@ -16,16 +16,22 @@ export default function NavBar(props: INavBarProps) {
 
   const [menuMobileOpen, setMenuMobileOpen] = useState(false)
   let location = useLocation();
-  let ga = (window as any).ga;
+  let gtag = (window as any).gtag;
   useEffect(() => {
-    if (ga) {
-      console.log("GA", ga);
-      ga.send(["pageview", location.pathname]);
+    if (gtag) {
+      console.log("GA", location.pathname,  gtag);
+      gtag('event', 'page_view', {
+        'page': location.pathname,
+        'event_label': 'Page View',
+        'event_category': 'engagement',
+
+      });
+
     } else {
       console.log("change location without GA")
     }
 
-  }, [ga, location.pathname]);
+  }, [gtag, location.pathname]);
   interface ILinks {
     url: string
     label: string
