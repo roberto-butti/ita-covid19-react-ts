@@ -26,7 +26,7 @@ interface IDataset {
 }
 
 class DashboardItaly extends Component<IProps, IState> {
-  
+
 
   constructor(props: IProps) {
     super(props);
@@ -40,7 +40,7 @@ class DashboardItaly extends Component<IProps, IState> {
 
   loadDatasetCharts() {
 
-    
+
     let dataset: IDataset = this.dataset("dimessi_guariti", "");
     let datasetTotaleCasi: IDataset = this.dataset("totale_casi", "");
     let data = {
@@ -141,7 +141,7 @@ class DashboardItaly extends Component<IProps, IState> {
               </div>
             </div>
 
-          
+
         </div>
 
 

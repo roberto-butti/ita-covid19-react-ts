@@ -6,6 +6,8 @@ import {
   Route
 } from "react-router-dom";
 
+
+
 import Dashboard from "./components/Dashboard/Dashboard";
 import Main from "./containers/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,10 +16,20 @@ import DashboardItaly from "./containers/DashboardItaly/DashboardItaly";
 import Charts from "./containers/Charts/Charts";
 import ScrollToTop from "./helpers/ScrollToTop";
 
+
+
+
+
+
 function App() {
+
+
+
+
+
   return (
     <Router>
-      
+
         <ScrollToTop />
         <NavBar></NavBar>
         <div className="container w-full mx-auto pt-20">
@@ -43,7 +55,7 @@ function App() {
           </div>
         </div>
         <Footer></Footer>
-      
+
     </Router>
   );
 }
