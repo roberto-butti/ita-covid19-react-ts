@@ -20,12 +20,12 @@ export default function NavBar(props: INavBarProps) {
   useEffect(() => {
     if (gtag) {
       console.log("GA", location.pathname,  gtag);
-      gtag('event', 'page_view', {
-        'page': location.pathname,
-        'event_label': 'Page View',
-        'event_category': 'engagement',
 
-      });
+      gtag('config', process.env.REACT_APP_GA_ID,
+        {
+          //'page_title': 'Your custom title',
+          'page_path': location.pathname
+        });
 
     } else {
       console.log("change location without GA")
