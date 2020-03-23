@@ -45,6 +45,11 @@ export default function NavBar(props: INavBarProps) {
       url: "/grafici",
       label: "Grafici"
     },
+    {
+      url: "/mappa",
+      label: "Mappa"
+    },
+
     /*
     {
       url: "/regioni",

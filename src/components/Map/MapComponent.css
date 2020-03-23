@@ -1,0 +1,26 @@
+.mapWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.map {
+  width: 80%;
+  border: 1px solid black;
+  height: 95vh;
+  background: #f0e68c;
+}
+
+.mapSidebar {
+  width: 20%;
+  height: 40vh;
+  text-align: left;
+  border: 1px solid black;
+  padding: 0px;
+  background-color: #fff;
+}
+li {
+  list-style: circle;
+
+}
