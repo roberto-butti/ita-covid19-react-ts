@@ -217,7 +217,8 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
 
   return (
     <div>
-      <div className="mapWrapper">
+      <div className=" w-full p-3" >
+        <div className="">
         Nuovi Attualmente positivi per regione.
         Dati aggiornati a {data_aggiornamento}
         {hasError &&
@@ -226,8 +227,8 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
           Qualche errore durante il recupero dati.
           </>
         }
-
-        <div className="map" ref={mapContainer}></div>
+        </div>
+        <div className="min-h-screen w-full p-3" ref={mapContainer}></div>
       </div>
     </div>
   );
