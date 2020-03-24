@@ -1,9 +1,5 @@
 [[redirects]]
-  from = "/regioni"
-  to = "/index.html"
-  status = 200
-[[redirects]]
-  from = "/italia"
+  from = "/mappa"
   to = "/index.html"
   status = 200
 [[redirects]]
