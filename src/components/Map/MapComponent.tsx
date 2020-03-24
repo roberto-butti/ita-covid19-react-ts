@@ -1,4 +1,4 @@
-import React, {  useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import "./MapComponent.css";
 import Theme from './miamiDay.js';
 
@@ -25,7 +25,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
   let here = (window as any).HERE;
   let hereMap = false;
   //let layerMVT = {};
-  let layerGeojson:any = {};
+  let layerGeojson: any = {};
   let XYZ_ACCESS_TOKEN = process.env.REACT_APP_HERE_APIKEY;
   let data: any[] = [];
 
@@ -40,6 +40,54 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     //layerMVT.pointerEvents(false);
   };
 
+  const pleaseColor = (attributeName: string, gradientLevel: number ) => {
+    let gradient = ["rgba(102, 255, 0, 0)",
+      "rgba(102, 255, 0, 1)",
+      "rgba(147, 255, 0, 1)",
+      "rgba(193, 255, 0, 1)",
+      "rgba(238, 255, 0, 1)",
+      "rgba(244, 227, 0, 1)",
+      "rgba(249, 198, 0, 1)",
+      "rgba(255, 170, 0, 1)",
+      "rgba(255, 113, 0, 1)",
+      "rgba(255, 57, 0, 1)",
+      "rgba(255, 0, 0, 1)"];
+
+    return [
+      /*
+      {
+        "fill": "#fa3f01",
+        "type": "Polygon",
+        "width": 26,
+        "height": 26,
+        "radius": 13,
+        "zIndex": 913,
+        "opacity": 1
+      },*/
+      {
+        //"fill": "rgba(0,0,0,0)",
+        "type": "Polygon",
+        "opacity": 0.5,
+        "stroke": "#BE6B65",
+        "fill": gradient[gradientLevel],
+        //"fill": "#fa3f01",
+        "zIndex": 912,
+        "strokeWidth": 1
+      },
+      {
+        "fill": "rgba(0,0,0,1)",
+        "font": "normal 12px Arial",
+        "type": "Text",
+        "stroke": "rgba(255,255,255,1)",
+        "zIndex": 919,
+        "offsetX": 0,
+        "offsetY": 0,
+        "opacity": 1,
+        "textRef": "properties['" + attributeName + "'] || ''",
+        "strokeWidth": 1
+      }
+    ]
+  }
   const createLayerGeojson = () => {
     let layerGeojson = new here.xyz.maps.layers.TileLayer({
       name: 'mySpaceLayer',
@@ -50,15 +98,42 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
       }),
       style: {
         styleGroups: {
+          10: pleaseColor("nuovi_attualmente_positivi",10),
+          9: pleaseColor("nuovi_attualmente_positivi", 9),
+          8: pleaseColor("nuovi_attualmente_positivi", 8),
+          7: pleaseColor("nuovi_attualmente_positivi", 7),
+          6: pleaseColor("nuovi_attualmente_positivi", 6),
+          5: pleaseColor("nuovi_attualmente_positivi", 5),
+          4: pleaseColor("nuovi_attualmente_positivi", 4),
+          3: pleaseColor("nuovi_attualmente_positivi", 3),
+          2: pleaseColor("nuovi_attualmente_positivi", 2),
+          1: pleaseColor("nuovi_attualmente_positivi", 1),
+          0: pleaseColor("nuovi_attualmente_positivi", 0),
+
           default: [
 
             { zIndex: 2, type: "Line", stroke: "#0000FF", strokeWidth: 1 },
             { zIndex: 3, type: "Text", textRef: "properties.nuovi_attualmente_positivi", fill: "#3D272B" }
           ]
         },
+
         assign: function (feature: any, zoomlevel: number) {
+          /**
+           * For styling
+           * https://xyz.api.here.com/maps/latest/documentation/here.xyz.maps.layers.TileLayer.Style.html
+           */
           //console.log(feature, zoomlevel);
-          return "default";
+          if (feature.properties.nuovi_attualmente_positivi > 1000) {
+            return "10"
+          } else if (feature.properties.nuovi_attualmente_positivi < 100) {
+            return "0";
+          } else if (feature.properties.nuovi_attualmente_positivi >= 100 && feature.properties.nuovi_attualmente_positivi <= 1000) {
+            let n = Math.ceil(feature.properties.nuovi_attualmente_positivi / 100) * 1;
+            //console.log(n);
+            return n.toString();
+          }
+          return  "default";
+
         }
       }
 
@@ -105,7 +180,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
           if (region.length === 1) {
             let d = new Date(region[0].data);
             let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            setDataAggiornamento(d.toLocaleDateString('it-IT',options));
+            setDataAggiornamento(d.toLocaleDateString('it-IT', options));
             res.features[index].properties.nuovi_attualmente_positivi = region[0].nuovi_attualmente_positivi;
           }
           console.log(res.features[index].properties);
@@ -122,13 +197,13 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
   const onInit = () => {
     console.log("OPS", Date.now());
 
-    if ( hereMap === false) {
+    if (hereMap === false) {
       layerGeojson = createLayerGeojson();
       fetchData();
       loadRegionGeojson();
       hereMap = new here.xyz.maps.Map(mapContainer.current, {
         zoomLevel: geoInfoDefault.zoom,
-        center: [geoInfoDefault.lng, geoInfoDefault.lat,  ],
+        center: [geoInfoDefault.lng, geoInfoDefault.lat,],
         layers: [createLayerMVT(), layerGeojson]
       });
 
@@ -144,10 +219,10 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     <div>
       <div className="mapWrapper">
         Nuovi Attualmente positivi per regione.
-        Dati aggiornati a { data_aggiornamento }
-        { hasError &&
+        Dati aggiornati a {data_aggiornamento}
+        {hasError &&
           <>
-          <hr />
+            <hr />
           Qualche errore durante il recupero dati.
           </>
         }
