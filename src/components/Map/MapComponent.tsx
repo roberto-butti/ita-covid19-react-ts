@@ -34,7 +34,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     let layerMVT = new here.xyz.maps.layers.MVTLayer({
       name: 'mvt-world-layer',
       remote: { url: 'https://xyz.api.here.com/tiles/herebase.02/{z}/{x}/{y}/omv?access_token=' + XYZ_ACCESS_TOKEN },
-      style: Theme
+      style: []
     });
     return layerMVT;
     //layerMVT.pointerEvents(false);
