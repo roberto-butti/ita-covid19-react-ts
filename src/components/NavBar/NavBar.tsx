@@ -19,7 +19,7 @@ export default function NavBar(props: INavBarProps) {
   let gtag = (window as any).gtag;
   useEffect(() => {
     if (gtag) {
-      console.log("GA", location.pathname,  gtag);
+      //console.log("GA", location.pathname,  gtag);
 
       gtag('config', process.env.REACT_APP_GA_ID,
         {
@@ -28,7 +28,7 @@ export default function NavBar(props: INavBarProps) {
         });
 
     } else {
-      console.log("change location without GA")
+      //console.log("change location without GA")
     }
 
   }, [gtag, location.pathname]);
