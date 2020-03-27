@@ -55,7 +55,13 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
         () => {
 
             let confDataset = [
-
+              {
+                metric: "nuovi_attualmente_positivi",
+                r: 200,
+                g: 200,
+                b: 200,
+                label: "Nuovi Positivi"
+              },
                 {
                     metric: "ricoverati_con_sintomi",
                     r: 200,
@@ -97,13 +103,22 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
                 }
                 datasets.push(
                     {
-                        label: element.label,
-                        backgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.05)',
+                        label:  element.label,
+                        //backgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.05)',
                         borderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
                         borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
-                        hoverBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
-                        data: currentDataset.data
+                        //hoverBackgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
+                        //hoverBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
+                    //borderColor: "#3e95cd",
+                    fill: false,
+                    data: currentDataset.data,
+                    /*
+                    trendlineLinear: {
+                      style: "#3e95cd",
+                      lineStyle: "line",
+                      width: 1
+                    }
+                    */
                     }
 
                 )
