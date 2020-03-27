@@ -34,7 +34,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     let layerMVT = new here.xyz.maps.layers.MVTLayer({
       name: 'mvt-world-layer',
       remote: { url: 'https://xyz.api.here.com/tiles/herebase.02/{z}/{x}/{y}/omv?access_token=' + XYZ_ACCESS_TOKEN },
-      style: []
+      style: Theme
     });
     return layerMVT;
     //layerMVT.pointerEvents(false);
@@ -175,13 +175,21 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
         for (let index = 0; index < res.features.length; index++) {
           const element = res.features[index];
           console.log("load geojson, regione: ", element.properties);
-          const region = data.filter(d => d.denominazione_regione === element.properties.NOME_REG);
+          let regionName = element.properties.NOME_REG;
+          regionName = (regionName === "Emilia-Romagna") ? "Emilia Romagna" : regionName;
+          let regions = (regionName === "Trentino-Alto Adige") ? ["P.A. Bolzano", "P.A. Trento"] : [regionName];
+          const region = data.filter(d => regions.includes(d.denominazione_regione) );
           console.log("load geojson, data   : ", region);
-          if (region.length === 1) {
+          if (region.length >0 ) {
             let d = new Date(region[0].data);
             let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             setDataAggiornamento(d.toLocaleDateString('it-IT', options));
-            res.features[index].properties.nuovi_attualmente_positivi = region[0].nuovi_attualmente_positivi;
+            let nuoviAttualmentePositivi = 0;
+            for (let idxregions = 0; idxregions < region.length; idxregions++) {
+              nuoviAttualmentePositivi = nuoviAttualmentePositivi + region[idxregions].nuovi_attualmente_positivi;
+
+            }
+            res.features[index].properties.nuovi_attualmente_positivi = nuoviAttualmentePositivi;
           }
           console.log(res.features[index].properties);
           layerGeojson.addFeature(element);
