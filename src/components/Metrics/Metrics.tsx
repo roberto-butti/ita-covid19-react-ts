@@ -20,7 +20,7 @@ export default function Metrics(props: IMetricsProps) {
               </div>
               <div className="flex-1 text-right md:text-center">
                 <h5 className="uppercase text-grey">Data aggiornamento</h5>
-                <h3 className="text-3xl">{new Date(props.data[idx].data).toLocaleDateString('it-IT', { weekday: 'long', month: 'long', day: 'numeric'}) } <span className="text-green"><i className="fas fa-caret-up"></i></span></h3>
+                <h3 className="text-3xl">{new Date(props.data[idx].data).toLocaleDateString('it-IT', { weekday: 'long', month: 'long', day: 'numeric'}) } </h3>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default function Metrics(props: IMetricsProps) {
               </div>
               <div className="flex-1 text-right md:text-center">
                 <h5 className="uppercase text-orange">nuovi_attualmente_positivi</h5>
-                <h3 className="text-3xl">{props.data[idx].nuovi_attualmente_positivi} <span className="text-green"><i className="fas fa-caret-up"></i></span></h3>
+                <h3 className="text-3xl">{props.data[idx].nuovi_attualmente_positivi} </h3>
               </div>
             </div>
           </div>
