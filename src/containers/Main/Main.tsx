@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Table from "../../components/Table/Table";
+import Metrics from "../../components/Metrics/Metrics";
 import SelectRegions from "../../components/Select/Regions";
 
 interface IMainProps {
@@ -52,7 +52,7 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
 
     return <>
         <SelectRegions region={region} selectRegion={selectRegion}></SelectRegions>
-        <Table
+        <Metrics
             data={data}
         />
         <hr />

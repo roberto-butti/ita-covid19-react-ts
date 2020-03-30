@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Main from "./containers/Main/Main";
+import Table from "./containers/Table/Table";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import Map from "./containers/Map/Map";
@@ -27,6 +28,9 @@ function App() {
               </Route>
             <Route path="/mappa">
               <Map></Map>
+            </Route>
+            <Route path="/tabelle">
+              <Table></Table>
             </Route>
               <Route path="/">
                 <Main></Main>

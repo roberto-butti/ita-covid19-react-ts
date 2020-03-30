@@ -39,7 +39,11 @@ export default function NavBar(props: INavBarProps) {
   const links = [
     {
       url: "/",
-      label: "Principale"
+      label: "Dashboard"
+    },
+    {
+      url: "/tabelle",
+      label: "Tabelle"
     },
     {
       url: "/grafici",
