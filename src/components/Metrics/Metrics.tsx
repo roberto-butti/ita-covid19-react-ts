@@ -35,6 +35,7 @@ export default function Metrics(props: IMetricsProps) {
               <div className="flex-1 text-right md:text-center">
                 <h5 className="uppercase text-orange">nuovi_attualmente_positivi</h5>
                 <h3 className="text-3xl">{props.data[idx].nuovi_attualmente_positivi} </h3>
+                <div className="text-xs">rispetto al precedente: {props.data[idx].nuovi_attualmente_positivi - props.data[idx- 1].nuovi_attualmente_positivi } </div>
               </div>
             </div>
           </div>
@@ -49,6 +50,7 @@ export default function Metrics(props: IMetricsProps) {
               <div className="flex-1 text-right md:text-center">
                 <h5 className="uppercase text-grey">Tamponi giornalieri</h5>
                 <h3 className="text-3xl">{props.data[idx].tamponi - props.data[idx-1].tamponi} </h3>
+                <div className="text-xs">rispetto al precedente: {(props.data[idx].tamponi - props.data[idx - 1].tamponi) - (props.data[idx-1].tamponi - props.data[idx - 2].tamponi)} </div>
               </div>
             </div>
           </div>
