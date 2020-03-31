@@ -40,9 +40,9 @@ export default function Metrics(props: IMetricsProps) {
                 <div className="rounded-full p-5 bg-orange-600"><i className="fa fa-wallet fa-2x fa-inverse"></i></div>
               </div>
               <div className="flex-1 text-right md:text-center">
-                <h5 className="font-bold uppercase text-orange-600">Nuovi attualmente positivi</h5>
-                <h3 className="font-bold text-3xl">{props.data[idx].nuovi_attualmente_positivi}</h3>
-                <div className="text-xs">rispetto al precedente: {props.data[idx].nuovi_attualmente_positivi - props.data[idx - 1].nuovi_attualmente_positivi} </div>
+                <h5 className="font-bold uppercase text-orange-600">Variazione del totale positivi</h5>
+                <h3 className="font-bold text-3xl">{props.data[idx].variazione_totale_positivi}</h3>
+                <div className="text-xs">rispetto al precedente: {props.data[idx].variazione_totale_positivi - props.data[idx - 1].variazione_totale_positivi} </div>
               </div>
             </div>
           </div>

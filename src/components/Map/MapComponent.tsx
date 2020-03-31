@@ -98,22 +98,22 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
       }),
       style: {
         styleGroups: {
-          10: pleaseColor("nuovi_attualmente_positivi",10),
-          9: pleaseColor("nuovi_attualmente_positivi", 9),
-          8: pleaseColor("nuovi_attualmente_positivi", 8),
-          7: pleaseColor("nuovi_attualmente_positivi", 7),
-          6: pleaseColor("nuovi_attualmente_positivi", 6),
-          5: pleaseColor("nuovi_attualmente_positivi", 5),
-          4: pleaseColor("nuovi_attualmente_positivi", 4),
-          3: pleaseColor("nuovi_attualmente_positivi", 3),
-          2: pleaseColor("nuovi_attualmente_positivi", 2),
-          1: pleaseColor("nuovi_attualmente_positivi", 1),
-          0: pleaseColor("nuovi_attualmente_positivi", 0),
+          10: pleaseColor("variazione_totale_positivi",10),
+          9: pleaseColor("variazione_totale_positivi", 9),
+          8: pleaseColor("variazione_totale_positivi", 8),
+          7: pleaseColor("variazione_totale_positivi", 7),
+          6: pleaseColor("variazione_totale_positivi", 6),
+          5: pleaseColor("variazione_totale_positivi", 5),
+          4: pleaseColor("variazione_totale_positivi", 4),
+          3: pleaseColor("variazione_totale_positivi", 3),
+          2: pleaseColor("variazione_totale_positivi", 2),
+          1: pleaseColor("variazione_totale_positivi", 1),
+          0: pleaseColor("variazione_totale_positivi", 0),
 
           default: [
 
             { zIndex: 2, type: "Line", stroke: "#0000FF", strokeWidth: 1 },
-            { zIndex: 3, type: "Text", textRef: "properties.nuovi_attualmente_positivi", fill: "#3D272B" }
+            { zIndex: 3, type: "Text", textRef: "properties.variazione_totale_positivi", fill: "#3D272B" }
           ]
         },
 
@@ -123,12 +123,12 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
            * https://xyz.api.here.com/maps/latest/documentation/here.xyz.maps.layers.TileLayer.Style.html
            */
           //console.log(feature, zoomlevel);
-          if (feature.properties.nuovi_attualmente_positivi > 1000) {
+          if (feature.properties.variazione_totale_positivi > 1000) {
             return "10"
-          } else if (feature.properties.nuovi_attualmente_positivi < 100) {
+          } else if (feature.properties.variazione_totale_positivi < 100) {
             return "0";
-          } else if (feature.properties.nuovi_attualmente_positivi >= 100 && feature.properties.nuovi_attualmente_positivi <= 1000) {
-            let n = Math.ceil(feature.properties.nuovi_attualmente_positivi / 100) * 1;
+          } else if (feature.properties.variazione_totale_positivi >= 100 && feature.properties.variazione_totale_positivi <= 1000) {
+            let n = Math.ceil(feature.properties.variazione_totale_positivi / 100) * 1;
             //console.log(n);
             return n.toString();
           }
@@ -176,7 +176,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
           const element = res.features[index];
           console.log("load geojson, regione: ", element.properties);
           let regionName = element.properties.NOME_REG;
-          regionName = (regionName === "Emilia-Romagna") ? "Emilia Romagna" : regionName;
+          //regionName = (regionName === "Emilia-Romagna") ? "Emilia Romagna" : regionName;
           let regions = (regionName === "Trentino-Alto Adige") ? ["P.A. Bolzano", "P.A. Trento"] : [regionName];
           const region = data.filter(d => regions.includes(d.denominazione_regione) );
           console.log("load geojson, data   : ", region);
@@ -186,10 +186,10 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
             setDataAggiornamento(d.toLocaleDateString('it-IT', options));
             let nuoviAttualmentePositivi = 0;
             for (let idxregions = 0; idxregions < region.length; idxregions++) {
-              nuoviAttualmentePositivi = nuoviAttualmentePositivi + region[idxregions].nuovi_attualmente_positivi;
+              nuoviAttualmentePositivi = nuoviAttualmentePositivi + region[idxregions].variazione_totale_positivi;
 
             }
-            res.features[index].properties.nuovi_attualmente_positivi = nuoviAttualmentePositivi;
+            res.features[index].properties.variazione_totale_positivi = nuoviAttualmentePositivi;
           }
           console.log(res.features[index].properties);
           layerGeojson.addFeature(element);
@@ -227,7 +227,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     <div>
       <div className=" w-full p-3" >
         <div className="">
-        Nuovi Attualmente positivi per regione.
+          Variazione totale positivi (totale_attualmente positivi giorno corrente - totale_attualmente positivi giorno precedente) per regione.
         Dati aggiornati a {data_aggiornamento}
         {hasError &&
           <>

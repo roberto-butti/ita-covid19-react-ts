@@ -56,7 +56,7 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
 
             let confDataset = [
               {
-                metric: "nuovi_attualmente_positivi",
+                metric: "variazione_totale_positivi",
                 r: 200,
                 g: 200,
                 b: 200,

@@ -63,14 +63,14 @@ const Table: React.FunctionComponent<ITableProps> = (props) => {
             cell: (row: any) => <CustomNumber row={row} columnName="isolamento_domiciliare" />,
         },
         {
-            name: 'Totale Attualmente Positivi',
-            //selector: 'totale_attualmente_positivi',
-            cell: (row: any) => <CustomNumber row={row} columnName="totale_attualmente_positivi" />,
+          name: 'Totale Positivi (ricoverati con sintomi + terapia_intensiva + isolamento domiciliare)',
+
+          cell: (row: any) => <CustomNumber row={row} columnName="totale_positivi" />,
         },
         {
-            name: 'Nuovi Attualmente Positivi',
-            //selector: 'nuovi_attualmente_positivi',
-            cell: (row: any) => <CustomNumber row={row} columnName="nuovi_attualmente_positivi" />,
+          name: 'Variazione del totale positivi',
+            //selector: 'variazione_totale_positivi',
+            cell: (row: any) => <CustomNumber row={row} columnName="variazione_totale_positivi" />,
         },
         {
             name: 'Dimessi Guariti',
