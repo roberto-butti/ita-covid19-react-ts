@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import {
+  Link,
+} from "react-router-dom";
 import Metrics from "../../components/Metrics/Metrics";
 import SelectRegions from "../../components/Select/Regions";
 
@@ -52,10 +54,18 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
 
     return <>
         <SelectRegions region={region} selectRegion={selectRegion}></SelectRegions>
+      <hr />
         <Metrics
-            data={data}
+            data={data} region={region}
         />
         <hr />
+        Puoi analizzare il dettaglio dei dati con:
+      <ul className="list-number">
+        <li><Link to="/tabelle" className="">Tabella, in cui vengoro riportati i dati storici per regione</Link></li>
+        <li><Link to="/grafici" className="">Grafici per regione in cui viene visualizzato l'andamento temporale per più dati (numero tamponi, numero nuovi casi...)</Link></li>
+        <li><Link to="/mappa" className="">Mappa con regioni in cui vengono evidenziati i nuovi casi rilevati</Link></li>
+        </ul>
+
         {hasError &&
             <div className="bg-orange-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
                 <p className="font-bold">Ooops</p>

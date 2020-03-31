@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 interface IMetricsProps {
+  region: string
   data: any[]
 }
 
 export default function Metrics(props: IMetricsProps) {
 
-  console.log("AAA",props.data);
+  //console.log("AAA",props.data);
 
   if (props.data.length > 0) {
     let idx = props.data.length -1;
@@ -19,8 +20,9 @@ export default function Metrics(props: IMetricsProps) {
                 <div className="rounded p-3 bg-green-dark"><i className="fa fa-wallet fa-2x fa-fw fa-inverse"></i></div>
               </div>
               <div className="flex-1 text-right md:text-center">
-                <h5 className="uppercase text-grey">Data aggiornamento</h5>
+                <h5 className="uppercase text-grey">{props.region === "all" ? "Tutta Italia" : props.region}</h5>
                 <h3 className="text-3xl">{new Date(props.data[idx].data).toLocaleDateString('it-IT', { weekday: 'long', month: 'long', day: 'numeric'}) } </h3>
+                <div>Ultimo aggiornamento</div>
               </div>
             </div>
           </div>
