@@ -68,7 +68,7 @@ const Table: React.FunctionComponent<ITableProps> = (props) => {
           cell: (row: any) => <CustomNumber row={row} columnName="totale_positivi" />,
         },
         {
-          name: 'Variazione del totale positivi',
+          name: 'Variazione Positivi rispetto al gg precedente',
             //selector: 'variazione_totale_positivi',
             cell: (row: any) => <CustomNumber row={row} columnName="variazione_totale_positivi" />,
         },

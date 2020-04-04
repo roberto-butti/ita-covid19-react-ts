@@ -1,4 +1,4 @@
-import React, { /*useState,*/ useEffect, useCallback } from 'react';
+import React, { /*useState, useEffect,*/ useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 
 export interface IChartProps {
@@ -58,7 +58,7 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
         r: 200,
         g: 200,
         b: 200,
-        label: "Nuovi Positivi"
+        label: "Variazione Positivi rispetto al gg precedente"
       }];
       if (type === "cumulative") {
         confDataset = [
@@ -98,7 +98,7 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
             r: 200,
             g: 200,
             b: 200,
-            label: "Nuovi Positivi"
+            label: "Variazione Positivi rispetto al gg precedente"
           },
         ];
       }
