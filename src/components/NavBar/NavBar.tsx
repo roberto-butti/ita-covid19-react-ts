@@ -39,19 +39,27 @@ export default function NavBar(props: INavBarProps) {
   const links = [
     {
       url: "/",
-      label: "Dashboard"
+      label: "Dashboard",
+      color:"orange",
+      icon:"home",
     },
     {
       url: "/tabelle",
-      label: "Tabelle"
+      label: "Tabelle",
+      color: "blue",
+      icon:"table"
     },
     {
       url: "/grafici",
-      label: "Grafici"
+      label: "Grafici",
+      color: "grey",
+      icon:"chart-line"
     },
     {
       url: "/mappa",
-      label: "Mappa"
+      label: "Mappa",
+      color: "green",
+      icon:"globe"
     },
 
     /*
@@ -76,7 +84,7 @@ export default function NavBar(props: INavBarProps) {
 
         <div className="w-1/2 pl-2 md:pl-0">
           <a className="text-black text-base xl:text-xl no-underline hover:no-underline font-bold" href="/">
-            COVID19 in Italia
+            Analisi diffusione Corona Virus in Italia
                     </a>
         </div>
         <div className="w-1/2 pr-0">
@@ -92,14 +100,16 @@ export default function NavBar(props: INavBarProps) {
                 </svg>
               </button>
               {menuMobileOpen &&
-              <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-                {links.map((el, i) =>
-                  <li key={el.url} className="mr-6 my-2 md:my-0">
-                    <Link onClick={() => setMenuMobileOpen(false)} to={el.url} className="block py-1 md:py-3 pl-1 align-middle text-orange-700 no-underline hover:text-black border-b-2 border-orange-dark hover:border-orange-dark">{el.label}</Link>
-                  </li>
-                )}
+                <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+                  {links.map((el, i) =>
+                    <li key={el.url} className="mr-6 my-2 md:my-0">
+                      <Link to={el.url} className={`block py-1 md:py-3 pl-1 align-middle  no-underline hover:text-gray-900 border-b-2 border-${el.color}-600 hover:border-${el.color}-600`}>
+                        <i className={`fas fa-${el.icon} fa-fw mr-3 text-${el.color}-600`}></i><span className="pb-1 md:pb-0 text-sm">{el.label}</span>
+                      </Link>
+                    </li>
+                  )}
 
-              </ul>
+                </ul>
               }
 
             </div>
@@ -112,7 +122,9 @@ export default function NavBar(props: INavBarProps) {
           <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
             {links.map((el, i) =>
               <li key={el.url} className="mr-6 my-2 md:my-0">
-                <Link to={el.url} className="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">{el.label}</Link>
+                <Link to={el.url} className={`block py-1 md:py-3 pl-1 align-middle  no-underline hover:text-gray-900 border-b-2 border-${el.color}-600 hover:border-${el.color}-600`}>
+                  <i className={`fas fa-${el.icon} fa-fw mr-3 text-${el.color}-600`}></i><span className="pb-1 md:pb-0 text-sm">{el.label}</span>
+                </Link>
               </li>
             )}
 
