@@ -1,4 +1,5 @@
 import React, { useState,  useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Link,
   useLocation,
@@ -36,46 +37,39 @@ export default function NavBar(props: INavBarProps) {
     url: string
     label: string
   }
+  const { t } = useTranslation();
+
   const links = [
     {
       url: "/",
-      label: "Dashboard",
+      label: t('Dashboard') ,
       color:"orange",
       icon:"home",
     },
     {
       url: "/tabelle",
-      label: "Tabelle",
+      label: t('Tabelle'),
       color: "blue",
       icon:"table"
     },
     {
       url: "/grafici",
-      label: "Grafici",
+      label: t('Grafici'),
       color: "grey",
       icon:"chart-line"
     },
     {
       url: "/mappa",
-      label: "Mappa",
+      label: t('Mappa'),
       color: "green",
       icon:"globe"
     },
 
-    /*
-    {
-      url: "/regioni",
-      label: "Regioni"
-    },
-    {
-      url: "/italia",
-      label: "Italia"
-    },
-    */
 
 
 
   ]
+
   return (
     <nav id="header" className="bg-white fixed w-full z-10 pin-t shadow">
 
@@ -84,7 +78,8 @@ export default function NavBar(props: INavBarProps) {
 
         <div className="w-1/2 pl-2 md:pl-0">
           <a className="text-black text-base xl:text-xl no-underline hover:no-underline font-bold" href="/">
-            Analisi diffusione Corona Virus in Italia
+            {t('title')}
+
                     </a>
         </div>
         <div className="w-1/2 pr-0">

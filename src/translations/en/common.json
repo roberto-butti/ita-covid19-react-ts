@@ -1,0 +1,23 @@
+{
+  "metrica_variazione_totale_positivi": "News amount of current positive cases (totale_positivi current day - totale_positivi previous day)",
+  "metrica_ricoverati_con_sintomi": "Hospitalised patients with symptoms",
+  "metrica_dimessi_guariti": "Recovered",
+  "metrica_totale_casi": "Total amount of positive cases",
+  "metrica_tamponi": "Tests performed",
+  "grafico_dati_cumulativi": "Cumulative data chart",
+  "grafico_dati_giornalieri": "Daily data chart",
+  "Progetto": "Project",
+  "progetto_descrizione": "Side project for the analysis of data relating to the spread of Corona Virus on the Italian territory.",
+  "data_source": "Data Source",
+  "data_source_description": "Data provided by Protezione Civile. ",
+  "external_url": "External URL",
+  "sources": "Sources (React + Typescript)",
+  "protezione_civile_data": "Data Provided by Protezione Civile",
+  "dati_aggiornati_il": "Data updated at",
+  "errore_recupero_dati": "Error whilee retrieving data.",
+  "Dashboard": "Dashboard",
+  "Tabelle": "Table",
+  "Grafici": "Charts",
+  "Mappa": "Italy Map",
+  "title": "Analysis about diffusion of Corona Virus in Italy"
+}

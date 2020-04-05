@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./MapComponent.css";
 import Theme from './miamiDay.js';
+import { useTranslation } from 'react-i18next';
 
 export interface IMapComponentProps {
   data: string[] | number[];
@@ -29,6 +30,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
   let XYZ_ACCESS_TOKEN = process.env.REACT_APP_HERE_APIKEY;
   let data: any[] = [];
 
+  const { t } = useTranslation();
 
   const createLayerMVT = () => {
     let layerMVT = new here.xyz.maps.layers.MVTLayer({
@@ -227,12 +229,13 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     <div>
       <div className=" w-full p-3" >
         <div className="">
-          Variazione totale positivi (totale_attualmente positivi giorno corrente - totale_attualmente positivi giorno precedente) per regione.
-        Dati aggiornati a {data_aggiornamento}
+          {t('metrica_variazione_totale_positivi')}
+
+          {t('dati_aggiornati_il')} {data_aggiornamento}
         {hasError &&
           <>
             <hr />
-          Qualche errore durante il recupero dati.
+            {t('errore_recupero_dati')}
           </>
         }
         </div>

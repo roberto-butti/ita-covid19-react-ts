@@ -1,0 +1,23 @@
+{
+  "metrica_variazione_totale_positivi": "Variazione del totale positivi (totale_positivi giorno corrente - totale_positivi giorno precedente)",
+  "metrica_ricoverati_con_sintomi": "Ricoverati con sintomi",
+  "metrica_dimessi_guariti": "Persone dimesse guarite",
+  "metrica_totale_casi": "Totale casi positivi",
+  "metrica_tamponi": "Totale tamponi",
+  "grafico_dati_cumulativi": "Grafico dati cumulativi",
+  "grafico_dati_giornalieri": "Grafico dati giornalieri",
+  "Progetto": "Progetto",
+  "progetto_descrizione": "Side project per l'analisi di dati relativi alla diffusione di Corona Virus sul territorio Italiano.",
+  "data_source": "Sorgenti Dati",
+  "data_source_description": "La fonte dati utilizzata è resa disponibile e aggiornata quotidianamente dal Dipartimento di Protezione Civile.",
+  "external_url": "URL ESterni",
+  "sources": "Sorgenti (React + Typescript)",
+  "protezione_civile_data": "Dati forniti da Protezione Civile",
+  "dati_aggiornati_il": "Dati aggiornati il",
+  "errore_recupero_dati": "Errore durante il recupero dati.",
+  "Dashboard": "Pannello",
+  "Tabelle": "Dati Storici",
+  "Grafici": "Grafici",
+  "Mappa": "Mappa",
+  "title": "Analisi diffusione Corona Virus in Italia"
+}
