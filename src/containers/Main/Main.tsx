@@ -86,7 +86,7 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
           </div>
           <div className="flex w-full md:w-1/3 ">
             <div className="px-8 text-3xl">
-              <Link to="/mappa" className=""><i className={`fas fa-globe fa-fw mr-3 text-green-600`}></i> {t("Map")}</Link>
+              <Link to="/mappa" className=""><i className={`fas fa-globe fa-fw mr-3 text-green-600`}></i> {t("Mappa")}</Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { /*useState, useEffect,*/ useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 export interface IChartProps {
   data: []
@@ -14,6 +15,8 @@ interface IDataset {
 
 const Chart: React.FunctionComponent<IChartProps> = (props) => {
   const { t } = useTranslation();
+
+  let locale = i18n.language === "it" ? "it-IT" : "en-US";
 
   function resetDataset(): IDataset {
     return {
@@ -31,13 +34,13 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
         let element = props.data[index];
         let d = new Date(element["data"]);
         let options = { weekday: 'short', month: 'short', day: 'numeric' };
-        res.label[index] = d.toLocaleDateString("it-IT", options);
+        res.label[index] = d.toLocaleDateString(locale, options);
         res.data[index] = element[attributeName];
       }
       return res;
 
     },
-    [props.data]);
+    [locale, props.data]);
   //function loadDataset(attributeName: string): IDataset {
   //}
 

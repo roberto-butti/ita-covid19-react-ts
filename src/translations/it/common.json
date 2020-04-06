@@ -25,5 +25,12 @@
   "Mappa": "Mappa",
   "title": "Analisi diffusione Corona Virus in Italia",
   "seleziona_area_di_interesse": "Seleziona l'area di interesse",
+  "Data": "Data",
+  "metrica_terapia_intensiva": "Ricoverati in terapia intensiva",
+  "metrica_totale_ospedalizzati": "Totale ospedalizzati",
+  "metrica_isolamento_domiciliare": "Persone in isolamento domiciliare",
+  "metrica_totale_positivi": "Totale attualmente positivi (ospedalizzati + isolamento domiciliare)",
+  "metrica_deceduti": "Persone decedute",
+  "storico_dati": "Corona Virus, storico dati",
   "puoi_analizzare_il_dettaglio_dei_dati": "Puoi analizzare il dettaglio dei dati con"
 }
