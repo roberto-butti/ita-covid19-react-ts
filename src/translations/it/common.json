@@ -1,5 +1,5 @@
 {
-  "metrica_variazione_totale_positivi": "Variazione del totale positivi (totale_positivi giorno corrente - totale_positivi giorno precedente)",
+  "metrica_variazione_totale_positivi": "Variazione del totale positivi",
   "metrica_ricoverati_con_sintomi": "Ricoverati con sintomi",
   "metrica_dimessi_guariti": "Persone dimesse guarite",
   "metrica_totale_casi": "Totale casi positivi",
@@ -15,6 +15,10 @@
   "protezione_civile_data": "Dati forniti da Protezione Civile",
   "dati_aggiornati_il": "Dati aggiornati il",
   "errore_recupero_dati": "Errore durante il recupero dati.",
+  "Italia": "Italia",
+  "ultimo_aggiornamento": "Ultimo aggiornamento",
+  "rispetto_al_precedente": "rispetto al precedente",
+  "metrica_tamponi_giornalieri": "Tamponi giornalieri",
   "Dashboard": "Pannello",
   "Tabelle": "Dati Storici",
   "Grafici": "Grafici",

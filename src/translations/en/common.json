@@ -1,5 +1,5 @@
 {
-  "metrica_variazione_totale_positivi": "News amount of current positive cases (totale_positivi current day - totale_positivi previous day)",
+  "metrica_variazione_totale_positivi": "News amount of current positive cases",
   "metrica_ricoverati_con_sintomi": "Hospitalised patients with symptoms",
   "metrica_dimessi_guariti": "Recovered",
   "metrica_totale_casi": "Total amount of positive cases",
@@ -15,6 +15,10 @@
   "protezione_civile_data": "Data Provided by Protezione Civile",
   "dati_aggiornati_il": "Data updated at",
   "errore_recupero_dati": "Error whilee retrieving data.",
+  "Italia": "Italy",
+  "ultimo_aggiornamento": "last update",
+  "rispetto_al_precedente": "compared to the previous",
+  "metrica_tamponi_giornalieri": "Tests performed daily",
   "Dashboard": "Dashboard",
   "Tabelle": "Table",
   "Grafici": "Charts",
