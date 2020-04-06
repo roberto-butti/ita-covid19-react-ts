@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./MapComponent.css";
 import Theme from './miamiDay.js';
+import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 export interface IMapComponentProps {
   data: string[] | number[];
@@ -29,6 +31,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
   let XYZ_ACCESS_TOKEN = process.env.REACT_APP_HERE_APIKEY;
   let data: any[] = [];
 
+  const { t } = useTranslation();
 
   const createLayerMVT = () => {
     let layerMVT = new here.xyz.maps.layers.MVTLayer({
@@ -162,7 +165,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
   async function loadRegionGeojson() {
     let url = "https://gist.githubusercontent.com/datajournalism-it/48e29e7c87dca7eb1d29/raw/2636aeef92ba0770a073424853f37690064eb0ea/regioni.geojson";
 
-
+    let locale = i18n.language === "it" ? "it-IT" : "en-US";
     const res = await fetch(url,
       {
         cache: "default"
@@ -183,7 +186,7 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
           if (region.length >0 ) {
             let d = new Date(region[0].data);
             let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            setDataAggiornamento(d.toLocaleDateString('it-IT', options));
+            setDataAggiornamento(d.toLocaleDateString(locale, options));
             let nuoviAttualmentePositivi = 0;
             for (let idxregions = 0; idxregions < region.length; idxregions++) {
               nuoviAttualmentePositivi = nuoviAttualmentePositivi + region[idxregions].variazione_totale_positivi;
@@ -227,12 +230,13 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
     <div>
       <div className=" w-full p-3" >
         <div className="">
-          Variazione totale positivi (totale_attualmente positivi giorno corrente - totale_attualmente positivi giorno precedente) per regione.
-        Dati aggiornati a {data_aggiornamento}
+          {t('metrica_variazione_totale_positivi')}.
+
+          {t('dati_aggiornati_il')} {data_aggiornamento}
         {hasError &&
           <>
             <hr />
-          Qualche errore durante il recupero dati.
+            {t('errore_recupero_dati')}
           </>
         }
         </div>

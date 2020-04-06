@@ -1,5 +1,7 @@
 import React, { /*useState, useEffect,*/ useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 export interface IChartProps {
   data: []
@@ -12,18 +14,9 @@ interface IDataset {
 }
 
 const Chart: React.FunctionComponent<IChartProps> = (props) => {
+  const { t } = useTranslation();
 
-  //const [hasError, setErrors] = useState(false)
-  //const [datasetForChart, setDatasetForChart] = useState<IDataset>(resetDataset())
-  //const [data, setData] = useState<[]>([])
-
-
-  /*
-  useEffect(() => {
-
-      setData(props.data);
-  }, [props.data]);
-  */
+  let locale = i18n.language === "it" ? "it-IT" : "en-US";
 
   function resetDataset(): IDataset {
     return {
@@ -41,13 +34,13 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
         let element = props.data[index];
         let d = new Date(element["data"]);
         let options = { weekday: 'short', month: 'short', day: 'numeric' };
-        res.label[index] = d.toLocaleDateString("it-IT", options);
+        res.label[index] = d.toLocaleDateString(locale, options);
         res.data[index] = element[attributeName];
       }
       return res;
 
     },
-    [props.data]);
+    [locale, props.data]);
   //function loadDataset(attributeName: string): IDataset {
   //}
 
@@ -58,7 +51,7 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
         r: 200,
         g: 200,
         b: 200,
-        label: "Variazione Positivi rispetto al gg precedente"
+        label: t("metrica_variazione_totale_positivi")
       }];
       if (type === "cumulative") {
         confDataset = [
@@ -67,28 +60,28 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
             r: 200,
             g: 200,
             b: 82,
-            label: "Ricoverati con Sintomi"
+            label: t("metrica_ricoverati_con_sintomi")
           },
           {
             metric: "dimessi_guariti",
             r: 132,
             g: 255,
             b: 132,
-            label: "Dimessi Guariti"
+            label: t("metrica_dimessi_guariti")
           },
           {
             metric: "totale_casi",
             r: 99,
             g: 0,
             b: 99,
-            label: "Totale Casi"
+            label: t("metrica_totale_casi")
           },
           {
             metric: "tamponi",
             r: 255,
             g: 0,
             b: 255,
-            label: "Tamponi"
+            label: t("metrica_tamponi")
           }
         ];
       } else if (type === "daily") {
@@ -98,7 +91,7 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
             r: 200,
             g: 200,
             b: 200,
-            label: "Variazione Positivi rispetto al gg precedente"
+            label: t("metrica_variazione_totale_positivi")
           },
         ];
       }
@@ -134,7 +127,7 @@ return {
   labels: labels,
   datasets: datasets
 }
-    }, [loadDataset]
+    }, [loadDataset, t]
   );
   /*
 useEffect(() => {
@@ -151,7 +144,7 @@ return (
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
-              Grafico Dati Cumulativi
+{ t("grafico_dati_cumulativi") }
               </h5>
           </div>
           <div className="p-5">
@@ -164,7 +157,7 @@ return (
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
-              Grafico Dati Giornalieri
+              {t("grafico_dati_giornalieri")}
               </h5>
           </div>
           <div className="p-5">

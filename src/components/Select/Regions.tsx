@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ISelectRegionsProps {
   region: string
@@ -6,15 +7,17 @@ export interface ISelectRegionsProps {
 }
 
 export default function SelectRegions(props: ISelectRegionsProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-          Seleziona l'area di interesse:
+        { t("seleziona_area_di_interesse")}:
             </label>
         <div className="inline-block relative w-64">
           <select value={props.region} onChange={props.selectRegion} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-            <option value="all">Tutta Italia</option>
+            <option value="all">{t("Italia")}</option>
 
             <option value="Abruzzo">Abruzzo</option>
             <option value="Basilicata">Basilicata</option>

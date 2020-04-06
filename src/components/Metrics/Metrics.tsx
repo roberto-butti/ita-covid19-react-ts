@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 interface IMetricsProps {
   region: string
@@ -7,8 +9,9 @@ interface IMetricsProps {
 
 export default function Metrics(props: IMetricsProps) {
 
-  //console.log("AAA",props.data);
-
+  const { t } = useTranslation();
+  let locale = i18n.language === "it" ? "it-IT": "en-US";
+  //console.log("Language detected: ", locale);
   if (props.data.length > 0) {
     let idx = props.data.length -1;
     return (
@@ -21,9 +24,9 @@ export default function Metrics(props: IMetricsProps) {
                 <div className="rounded-full p-5 bg-green-600"><i className="fa fa-wallet fa-2x fa-inverse"></i></div>
               </div>
               <div className="flex-1 text-right md:text-center">
-                <h5 className="font-bold uppercase text-gray-600">{props.region === "all" ? "Tutta Italia" : props.region}</h5>
-                <h3 className="font-bold text-3xl">{new Date(props.data[idx].data).toLocaleDateString('it-IT', { weekday: 'long', month: 'long', day: 'numeric' })}</h3>
-                <div className="text-xs">Ultimo aggiornamento</div>
+                <h5 className="font-bold uppercase text-gray-600">{props.region === "all" ? t("Italia") : props.region}</h5>
+                <h3 className="font-bold text-3xl">{new Date(props.data[idx].data).toLocaleDateString(locale, { weekday: 'long', month: 'long', day: 'numeric' })}</h3>
+                <div className="text-xs">{ t("ultimo_aggiornamento")}</div>
               </div>
             </div>
           </div>
@@ -40,9 +43,9 @@ export default function Metrics(props: IMetricsProps) {
                 <div className="rounded-full p-5 bg-orange-600"><i className="fa fa-wallet fa-2x fa-inverse"></i></div>
               </div>
               <div className="flex-1 text-right md:text-center">
-                <h5 className="font-bold uppercase text-orange-600">Variazione Positivi rispetto al gg precedente</h5>
+                <h5 className="font-bold uppercase text-orange-600">{t("metrica_variazione_totale_positivi")}</h5>
                 <h3 className="font-bold text-3xl">{props.data[idx].variazione_totale_positivi}</h3>
-                <div className="text-xs">rispetto al precedente: {props.data[idx].variazione_totale_positivi - props.data[idx - 1].variazione_totale_positivi} </div>
+                <div className="text-xs">{ t("rispetto_al_precedente")}: {props.data[idx].variazione_totale_positivi - props.data[idx - 1].variazione_totale_positivi} </div>
               </div>
             </div>
           </div>
@@ -57,9 +60,9 @@ export default function Metrics(props: IMetricsProps) {
                 <div className="rounded-full p-5 bg-yellow-600"><i className="fas fa-user-plus fa-2x fa-inverse"></i></div>
               </div>
               <div className="flex-1 text-right md:text-center">
-                <h5 className="font-bold uppercase text-gray-600">Tamponi giornalieri</h5>
+                <h5 className="font-bold uppercase text-gray-600">{t("metrica_tamponi_giornalieri")}</h5>
                 <h3 className="font-bold text-3xl">{props.data[idx].tamponi - props.data[idx - 1].tamponi}</h3>
-                <div className="text-xs">rispetto al precedente: {(props.data[idx].tamponi - props.data[idx - 1].tamponi) - (props.data[idx - 1].tamponi - props.data[idx - 2].tamponi)} </div>
+                <div className="text-xs">{t("rispetto_al_precedente")}: {(props.data[idx].tamponi - props.data[idx - 1].tamponi) - (props.data[idx - 1].tamponi - props.data[idx - 2].tamponi)} </div>
               </div>
             </div>
           </div>
