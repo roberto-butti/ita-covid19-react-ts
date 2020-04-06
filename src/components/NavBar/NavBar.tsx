@@ -55,7 +55,7 @@ export default function NavBar(props: INavBarProps) {
     {
       url: "/grafici",
       label: t('Grafici'),
-      color: "grey",
+      color: "red",
       icon:"chart-line"
     },
     {

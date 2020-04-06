@@ -24,5 +24,6 @@
   "Grafici": "Charts",
   "Mappa": "Italy Map",
   "title": "Analysis about diffusion of Corona Virus in Italy",
-  "seleziona_area_di_interesse": "Select the area (Italy or specific region)"
+  "seleziona_area_di_interesse": "Select the area (Italy or specific region)",
+  "puoi_analizzare_il_dettaglio_dei_dati": "You can analyse data through"
 }
