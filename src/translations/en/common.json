@@ -1,5 +1,5 @@
 {
-  "metrica_variazione_totale_positivi": "News amount of current positive cases",
+  "metrica_variazione_totale_positivi": "Change total positive",
   "metrica_ricoverati_con_sintomi": "Hospitalised patients with symptoms",
   "metrica_dimessi_guariti": "Recovered",
   "metrica_totale_casi": "Total amount of positive cases",
@@ -17,7 +17,7 @@
   "errore_recupero_dati": "Error whilee retrieving data.",
   "Italia": "Italy",
   "ultimo_aggiornamento": "last update",
-  "rispetto_al_precedente": "compared to the previous",
+  "rispetto_al_precedente": "Compared to the previous",
   "metrica_tamponi_giornalieri": "Tests performed daily",
   "Dashboard": "Dashboard",
   "Tabelle": "Table",
@@ -32,5 +32,7 @@
   "metrica_totale_positivi": "Total amount of current positive cases (Hospitalised patients + Home confinement)",
   "metrica_deceduti": "Death",
   "storico_dati": "Corona Virus, historical data",
-  "puoi_analizzare_il_dettaglio_dei_dati": "You can analyse data through"
+  "puoi_analizzare_il_dettaglio_dei_dati": "You can analyse data through",
+  "variazione_percentuale": "Percentage change ",
+  "precedente": "Previous"
 }
