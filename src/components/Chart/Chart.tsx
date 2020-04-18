@@ -93,6 +93,13 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
             b: 200,
             label: t("metrica_variazione_totale_positivi")
           },
+          {
+            metric: "nuovi_positivi",
+            r: 99,
+            g: 0,
+            b: 99,
+            label: t("metrica_nuovi_positivi")
+          },
         ];
       }
 
