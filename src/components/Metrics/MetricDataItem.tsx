@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import i18n from "i18next";
+//import i18n from "i18next";
 import MetricItem from "./MetricItem";
 
 interface IMetricDataItemProps {
@@ -21,7 +21,7 @@ export default function MetricDataItem(props: IMetricDataItemProps) {
     console.log(oldNumber, newNumber, increaseValue);
     return Math.floor((increaseValue / Math.abs(oldNumber)) * 100);
   }
-  let locale = i18n.language === "it" ? "it-IT" : "en-US";
+  //let locale = i18n.language === "it" ? "it-IT" : "en-US";
 
   if (props.data.length > 0) {
     let idx = props.data.length - 1;
