@@ -20,12 +20,12 @@ export default function Metrics(props: IMetricsProps) {
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 xl:w-1/3 p-3">
           <MetricItem
-            title={props.region === "all" ? t("Italia") : props.region }
+            value={props.region === "all" ? t("Italia") : props.region }
             color="green"
             icon="calendar"
-            value={new Date(props.data[idx].data).toLocaleDateString(locale, { month: 'long', day: 'numeric' })}
-            line1={new Date(props.data[idx].data).toLocaleDateString(locale, { weekday: 'long' })}
-            line2={t("ultimo_aggiornamento")}
+            title={new Date(props.data[idx].data).toLocaleDateString(locale, { weekday: 'long' , month: 'long', day: 'numeric' })}
+            line1="---"
+            line2="---"
             line3={ "Today: " + new Date().toLocaleDateString(locale, { month: 'long', day: 'numeric' })}
           />
         </div>
