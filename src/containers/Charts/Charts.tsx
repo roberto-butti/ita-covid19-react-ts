@@ -53,7 +53,7 @@ export default function Charts (props: IChartsProps) {
 
     return <>
         <SelectRegions region={region} selectRegion={selectRegion}></SelectRegions>
-        <Chart data={data} />
+        <Chart data={data} region={region} />
         <hr />
         {hasError &&
             <div className="bg-orange-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">

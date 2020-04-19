@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import i18n from "i18next";
 
 export interface IChartProps {
-  data: []
+  data: [],
+  region: string
 }
 
 
@@ -223,7 +224,7 @@ return (
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_dati_giornalieri")}
+              {t("grafico_dati_giornalieri")}: {props.region === "all" ? t("Italia") : props.region}
               </h5>
           </div>
           <div className="p-5">
@@ -236,7 +237,7 @@ return (
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_variazioni")}
+              {t("grafico_variazioni")}: {props.region === "all" ? t("Italia") : props.region}
             </h5>
           </div>
           <div className="p-5">
@@ -249,7 +250,7 @@ return (
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_dati_cumulativi")}
+              {t("grafico_dati_cumulativi")}: {props.region === "all" ? t("Italia") : props.region}
             </h5>
           </div>
           <div className="p-5">
