@@ -160,53 +160,53 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
           }]
       }
 
-let labels: string[] = [];
-let datasets = [];
-for (let index = 0; index < confDataset.length; index++) {
-  const element = confDataset[index];
-  let currentDataset: IDataset = loadDataset(element.metric);
-  if (index === 0) {
-    labels = currentDataset.label
-  }
-  datasets.push(
-    {
-      label: element.label,
-      borderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
-      borderWidth: 2,
-      fill: false,
+      let labels: string[] = [];
+      let datasets = [];
+      for (let index = 0; index < confDataset.length; index++) {
+        const element = confDataset[index];
+        let currentDataset: IDataset = loadDataset(element.metric);
+        if (index === 0) {
+          labels = currentDataset.label
+        }
+        datasets.push(
+          {
+            label: element.label,
+            borderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
+            borderWidth: 2,
+            fill: false,
 
 
-      lineTension: 0.4,
-      backgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
+            lineTension: 0.4,
+            backgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
 
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.6)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
-      pointHoverBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 2,
-      pointHitRadius: 10,
-      //steppedLine: true,
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.6)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
+            pointHoverBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 2,
+            pointHitRadius: 10,
+            //steppedLine: true,
 
 
 
-      data: currentDataset.data,
+            data: currentDataset.data,
 
-    }
+          }
 
-  )
+        )
 
-}
-return {
-  labels: labels,
-  datasets: datasets
-}
+      }
+      return {
+        labels: labels,
+        datasets: datasets
+      }
     }, [loadDataset, palette.amber, palette.blue, palette.indigo, palette.lime, palette.orange, palette.pink, palette.purple, palette.red, palette.yellow, t]
   );
   /*
@@ -216,53 +216,68 @@ useEffect(() => {
 }, [loadDatasetForChart, props.data]);
 */
 
-return (
-  <>
-    <hr className="border-b-2 border-gray-400 my-8 mx-4" />
-    <div className="flex flex-row flex-wrap flex-grow mt-2">
-      <div className="w-full   p-3">
-        <div className="bg-white border rounded shadow">
-          <div className="border-b p-3">
-            <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_dati_giornalieri")}: {props.region === "all" ? t("Italia") : props.region}
-              </h5>
-          </div>
-          <div className="p-5">
-            <Line data={loadDatasetForChart("daily")} height={400}
-              options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-      </div>
-      <div className="w-full md:w-1/2 p-3">
-        <div className="bg-white border rounded shadow">
-          <div className="border-b p-3">
-            <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_variazioni")}: {props.region === "all" ? t("Italia") : props.region}
-            </h5>
-          </div>
-          <div className="p-5">
-            <Line data={loadDatasetForChart("change")} height={400}
-              options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-      </div>
-      <div className="w-full md:w-1/2 p-3">
-        <div className="bg-white border rounded shadow">
-          <div className="border-b p-3">
-            <h5 className="font-bold uppercase text-gray-600">
-              {t("grafico_dati_cumulativi")}: {props.region === "all" ? t("Italia") : props.region}
-            </h5>
-          </div>
-          <div className="p-5">
-            <Line data={loadDatasetForChart("cumulative")} height={400}
-              options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-      </div>
+  let optionsLine = {
+    maintainAspectRatio: false,
+    /* https://www.chartjs.org/docs/latest/configuration/tooltip.html */
+    tooltips: {
+      mode: 'index',
+      intersect: true,
+    },
 
-    </div>
-  </>
-);
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    }
+
+  };
+
+  return (
+    <>
+      <hr className="border-b-2 border-gray-400 my-8 mx-4" />
+      <div className="flex flex-row flex-wrap flex-grow mt-2">
+        <div className="w-full   p-3">
+          <div className="bg-white border rounded shadow">
+            <div className="border-b p-3">
+              <h5 className="font-bold uppercase text-gray-600">
+                {t("grafico_dati_giornalieri")}: {props.region === "all" ? t("Italia") : props.region}
+              </h5>
+            </div>
+            <div className="p-5">
+              <Line data={loadDatasetForChart("daily")} height={400}
+                options={ optionsLine } />
+            </div>
+          </div>
+        </div>
+        <div className="w-full md:w-1/2 p-3">
+          <div className="bg-white border rounded shadow">
+            <div className="border-b p-3">
+              <h5 className="font-bold uppercase text-gray-600">
+                {t("grafico_variazioni")}: {props.region === "all" ? t("Italia") : props.region}
+              </h5>
+            </div>
+            <div className="p-5">
+              <Line data={loadDatasetForChart("change")} height={400}
+                options={optionsLine} />
+            </div>
+          </div>
+        </div>
+        <div className="w-full md:w-1/2 p-3">
+          <div className="bg-white border rounded shadow">
+            <div className="border-b p-3">
+              <h5 className="font-bold uppercase text-gray-600">
+                {t("grafico_dati_cumulativi")}: {props.region === "all" ? t("Italia") : props.region}
+              </h5>
+            </div>
+            <div className="p-5">
+              <Line data={loadDatasetForChart("cumulative")} height={400}
+                options={optionsLine} />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
 }
 
 
