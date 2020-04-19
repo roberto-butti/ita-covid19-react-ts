@@ -7,6 +7,7 @@
   "metrica_nuovi_positivi": "New current positive cases",
   "grafico_dati_cumulativi": "Cumulative data chart",
   "grafico_dati_giornalieri": "Daily data chart",
+  "grafico_variazioni": "Daily change chart",
   "Progetto": "Project",
   "progetto_descrizione": "Side project for the analysis of data relating to the spread of Corona Virus on the Italian territory.",
   "data_source": "Data Source",

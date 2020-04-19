@@ -11,6 +11,7 @@ export interface IChartProps {
 interface IDataset {
   label: string[];
   data: string[] | number[];
+
 }
 
 const Chart: React.FunctionComponent<IChartProps> = (props) => {
@@ -44,63 +45,118 @@ const Chart: React.FunctionComponent<IChartProps> = (props) => {
   //function loadDataset(attributeName: string): IDataset {
   //}
 
+  let palette = {
+    red: [244, 67, 54],
+    pink: [233, 30, 99],
+    purple: [156, 39, 176],
+    deep_purple: [103, 58, 183],
+    indigo: [63, 81, 181],
+    blue: [33, 150, 243],
+    light_blue: [3, 169, 244],
+    cyan: [0, 188, 212],
+    teal: [0, 150, 136],
+    green: [76, 175, 80],
+    light_green: [139, 195, 74],
+    lime: [205, 220, 57],
+    yellow: [255, 235, 59],
+    amber: [255, 193, 7],
+    orange: [255, 152, 0],
+    deep_orange: [255, 87, 34],
+    brown: [121, 85, 72],
+    grey: [158, 158, 158],
+    blue_grey: [96, 125, 139]
+
+  }
+
   const loadDatasetForChart = useCallback(
     (type: string) => {
       let confDataset = [{
-        metric: "variazione_totale_positivi",
-        r: 200,
-        g: 200,
-        b: 200,
-        label: t("metrica_variazione_totale_positivi")
+        metric: "totale_positivi",
+        r: palette.indigo[0],
+        g: palette.indigo[1],
+        b: palette.indigo[2],
+        label: t("metrica_totale_positivi")
       }];
       if (type === "cumulative") {
         confDataset = [
           {
-            metric: "ricoverati_con_sintomi",
-            r: 200,
-            g: 200,
-            b: 82,
-            label: t("metrica_ricoverati_con_sintomi")
-          },
-          {
             metric: "dimessi_guariti",
-            r: 132,
-            g: 255,
-            b: 132,
+            r: palette.lime[0],
+            g: palette.lime[1],
+            b: palette.lime[2],
             label: t("metrica_dimessi_guariti")
           },
           {
+            metric: "deceduti",
+            r: palette.blue[0],
+            g: palette.blue[1],
+            b: palette.blue[2],
+            label: t("metrica_deceduti")
+          },
+          {
             metric: "totale_casi",
-            r: 99,
-            g: 0,
-            b: 99,
+            r: palette.yellow[0],
+            g: palette.yellow[1],
+            b: palette.yellow[2],
             label: t("metrica_totale_casi")
           },
           {
             metric: "tamponi",
-            r: 255,
-            g: 0,
-            b: 255,
+            r: palette.amber[0],
+            g: palette.amber[1],
+            b: palette.amber[2],
             label: t("metrica_tamponi")
           }
         ];
       } else if (type === "daily") {
         confDataset = [
           {
-            metric: "variazione_totale_positivi",
-            r: 200,
-            g: 200,
-            b: 200,
-            label: t("metrica_variazione_totale_positivi")
-          },
-          {
             metric: "nuovi_positivi",
-            r: 99,
-            g: 0,
-            b: 99,
+            r: palette.indigo[0],
+            g: palette.indigo[1],
+            b: palette.indigo[2],
             label: t("metrica_nuovi_positivi")
           },
+          {
+            metric: "totale_positivi",
+            r: palette.blue[0],
+            g: palette.blue[1],
+            b: palette.blue[2],
+            label: t("metrica_totale_positivi")
+          },
+          {
+            metric: "ricoverati_con_sintomi",
+            r: palette.red[0],
+            g: palette.red[1],
+            b: palette.red[2],
+            label: t("metrica_ricoverati_con_sintomi")
+          },
+          {
+            metric: "isolamento_domiciliare",
+            r: palette.pink[0],
+            g: palette.pink[1],
+            b: palette.pink[2],
+            label: t("metrica_isolamento_domiciliare")
+          },
+          {
+            metric: "totale_ospedalizzati",
+            r: palette.purple[0],
+            g: palette.purple[1],
+            b: palette.purple[2],
+            label: t("metrica_totale_ospedalizzati")
+          },
+
+
         ];
+      } else if (type === "change") {
+        confDataset = [
+          {
+            metric: "variazione_totale_positivi",
+            r: palette.orange[0],
+            g: palette.orange[1],
+            b: palette.orange[2],
+            label: t("metrica_variazione_totale_positivi")
+          }]
       }
 
 let labels: string[] = [];
@@ -115,16 +171,32 @@ for (let index = 0; index < confDataset.length; index++) {
     {
       label: element.label,
       borderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
-      borderWidth: 1,
+      borderWidth: 2,
       fill: false,
+
+
+      lineTension: 0.4,
+      backgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
+
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.6)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',0.4)',
+      pointHoverBorderColor: 'rgba(' + element.r + ',' + element.g + ',' + element.b + ',1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 2,
+      pointHitRadius: 10,
+      //steppedLine: true,
+
+
+
       data: currentDataset.data,
-      /*
-      trendlineLinear: {
-        style: "#3e95cd",
-        lineStyle: "line",
-        width: 1
-      }
-      */
+
     }
 
   )
@@ -134,7 +206,7 @@ return {
   labels: labels,
   datasets: datasets
 }
-    }, [loadDataset, t]
+    }, [loadDataset, palette.amber, palette.blue, palette.indigo, palette.lime, palette.orange, palette.pink, palette.purple, palette.red, palette.yellow, t]
   );
   /*
 useEffect(() => {
@@ -147,20 +219,7 @@ return (
   <>
     <hr className="border-b-2 border-gray-400 my-8 mx-4" />
     <div className="flex flex-row flex-wrap flex-grow mt-2">
-      <div className="w-full md:w-1/2 p-3">
-        <div className="bg-white border rounded shadow">
-          <div className="border-b p-3">
-            <h5 className="font-bold uppercase text-gray-600">
-{ t("grafico_dati_cumulativi") }
-              </h5>
-          </div>
-          <div className="p-5">
-            <Line data={loadDatasetForChart("cumulative")} height={400}
-              options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-      </div>
-      <div className="w-full md:w-1/2 p-3">
+      <div className="w-full   p-3">
         <div className="bg-white border rounded shadow">
           <div className="border-b p-3">
             <h5 className="font-bold uppercase text-gray-600">
@@ -169,6 +228,32 @@ return (
           </div>
           <div className="p-5">
             <Line data={loadDatasetForChart("daily")} height={400}
+              options={{ maintainAspectRatio: false }} />
+          </div>
+        </div>
+      </div>
+      <div className="w-full md:w-1/2 p-3">
+        <div className="bg-white border rounded shadow">
+          <div className="border-b p-3">
+            <h5 className="font-bold uppercase text-gray-600">
+              {t("grafico_variazioni")}
+            </h5>
+          </div>
+          <div className="p-5">
+            <Line data={loadDatasetForChart("change")} height={400}
+              options={{ maintainAspectRatio: false }} />
+          </div>
+        </div>
+      </div>
+      <div className="w-full md:w-1/2 p-3">
+        <div className="bg-white border rounded shadow">
+          <div className="border-b p-3">
+            <h5 className="font-bold uppercase text-gray-600">
+              {t("grafico_dati_cumulativi")}
+            </h5>
+          </div>
+          <div className="p-5">
+            <Line data={loadDatasetForChart("cumulative")} height={400}
               options={{ maintainAspectRatio: false }} />
           </div>
         </div>
