@@ -5,7 +5,7 @@
 ## Data
 
 - Dataset :  [COVID-19 Italia - Monitoraggio situazione](https://github.com/pcm-dpc/COVID-19)
-- JSON for Italy trend: https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json 
+- JSON for Italy trend: https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json
 - Dashboard Demo: [Dashboard](https://ita-covid19-react.netlify.com/)
 
 # Developers
@@ -19,4 +19,4 @@ I would like to list some useful links/posts/articles that helped me to solve so
 - Format javascript data: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
 - How to loop in react JSX: https://flaviocopes.com/react-how-to-loop/
 - Tailwind template: https://github.com/tailwindtoolbox/Admin-Template-Day/blob/master/admin-day%20(v0-7-4).html
-
+- Color Palette: https://materialuicolors.co/
