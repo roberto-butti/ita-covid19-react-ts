@@ -214,7 +214,10 @@ const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
       loadRegionGeojson();
       hereMap = new here.xyz.maps.Map(mapContainer.current, {
         zoomLevel: geoInfoDefault.zoom,
-        center: [geoInfoDefault.lng, geoInfoDefault.lat,],
+        center: {
+          latitude: geoInfoDefault.lat,
+          longitude: geoInfoDefault.lng
+        },
         layers: [createLayerMVT(), layerGeojson]
       });
 
